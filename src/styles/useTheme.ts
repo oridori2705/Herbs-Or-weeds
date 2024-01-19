@@ -30,30 +30,3 @@ const useTheme = (): [typeof theme, typeof toggleTheme] => {
 }
 
 export default useTheme
-
-/*만약 dark 테마일 때 다른 색상으로 커스텀 하고 싶다면
-const Profile: React.FC = () => {
-  const theme = useTheme(); <- theme값 갖고와서
-
-  return (
-    <div css={ProfileBlock}>
-      <div css={IntroduceContainer(theme)}>
-          ...
-      </div>
-    </div>
-  );
-};
-
-export default Profile;
-
-const ProfileBlock = css`
-  display: flex;
-`;
-
-const IntroduceContainer = (theme: Theme) => css` <- 여기서 커스텀
-  display: flex;
-  flex-direction: column;
-  color: ${theme.fontColor};
-`;
-
-*/

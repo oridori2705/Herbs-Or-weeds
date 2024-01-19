@@ -6,18 +6,11 @@ interface ThemeGroup {
   light: Theme
   dark: Theme
 }
-/**
- * @light theme
- */
 
 export const light: Theme = {
   bgColor: '#fff',
   fontColor: '#000'
 }
-
-/**
- * @dark theme
- */
 
 export const dark: Theme = {
   bgColor: '#000',

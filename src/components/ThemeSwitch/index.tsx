@@ -6,8 +6,7 @@ interface ThemeSwitchProps {
 const ThemeSwitch = ({ checked, toggleSwitch }: ThemeSwitchProps) => {
   return (
     <div>
-      {checked}
-      <button onClick={toggleSwitch}>버튼</button>
+      <button onClick={toggleSwitch}>{checked ? 'light' : 'dark'}버튼</button>
     </div>
   )
 }
