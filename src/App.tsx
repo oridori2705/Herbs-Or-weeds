@@ -1,35 +1,35 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { Global, ThemeProvider } from '@emotion/react'
+import styled from '@emotion/styled'
+import useTheme from './styles/useTheme'
+import GlobalStyle from './styles/GlobalStyles'
+import { default as THEME } from './styles/Theme'
+import ThemeSwitch from './components/ThemeSwitch'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [theme, onToggle] = useTheme()
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <ThemeProvider theme={THEME[theme]}>
+        <Global styles={GlobalStyle(THEME[theme])} />
+        <MainContainer>
+          <ThemeSwitch
+            checked={theme === 'dark'}
+            toggleSwitch={onToggle}
+          />
+          <ProfileContainer>dsadsdadsasda</ProfileContainer>
+        </MainContainer>
+      </ThemeProvider>
     </>
   )
 }
 
 export default App
+
+const MainContainer = styled.div`
+  margin: 0 auto;
+  max-width: 780px;
+`
+const ProfileContainer = styled.div`
+  margin: 1rem;
+`
