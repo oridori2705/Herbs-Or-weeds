@@ -1,35 +1,49 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { Global, ThemeProvider } from '@emotion/react'
+import styled from '@emotion/styled'
+import useTheme from './styles/useTheme'
+import GlobalStyle from './styles/GlobalStyles'
+import { default as THEME } from './styles/Theme'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import { RouterProvider } from 'react-router-dom'
+import { router } from './routes/Router'
+import ThemeSwitch from './components/ThemeSwitch'
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 1000 * 60 * 5,
+      gcTime: 1000 * 60 * 5,
+      retry: 0,
+      refetchOnWindowFocus: false
+    }
+  }
+})
 
 function App() {
-  const [count, setCount] = useState(0)
-
+  const [theme, onToggle] = useTheme()
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <QueryClientProvider client={queryClient}>
+        <ThemeProvider theme={THEME[theme]}>
+          <Global styles={GlobalStyle(THEME[theme])} />
+          <MainContainer>
+            <RouterProvider router={router} />
+          </MainContainer>
+          <ThemeSwitch
+            checked={theme === 'dark'}
+            toggleSwitch={onToggle}
+          />
+          <ReactQueryDevtools initialIsOpen={false} />
+        </ThemeProvider>
+      </QueryClientProvider>
     </>
   )
 }
 
 export default App
+
+const MainContainer = styled.div`
+  margin: 0 auto;
+  max-width: 780px;
+`
