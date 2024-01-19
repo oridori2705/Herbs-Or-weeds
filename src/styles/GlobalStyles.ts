@@ -2,6 +2,18 @@ import { css } from '@emotion/react'
 import { Theme } from './Theme'
 
 const GlobalStyle = (theme: Theme) => css`
+  @font-face {
+    font-family: 'Murukmuruk';
+    src: url('src/assets/fonts/KCC-Murukmuruk.ttf');
+    font-weight: normal;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'BMJUA';
+    src: url('src/assets/fonts/BMJUA.ttf');
+    font-weight: lighter;
+    font-style: normal;
+  }
   * {
     box-sizing: border-box;
   }
@@ -51,6 +63,7 @@ const GlobalStyle = (theme: Theme) => css`
 
   button {
     background: transparent;
+    font-family: 'BMJUA';
     color: ${theme.fontColor};
     cursor: pointer;
   }
@@ -65,6 +78,7 @@ const GlobalStyle = (theme: Theme) => css`
     }
   }
   body {
+    font-family: 'BMJUA';
     background-color: ${theme.bgColor};
     color: ${theme.fontColor};
   }
