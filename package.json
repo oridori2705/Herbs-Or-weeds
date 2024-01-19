@@ -9,7 +9,8 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "chromatic": "npx chromatic --project-token=chpt_4c3b78240071b9a"
   },
   "dependencies": {
     "@emotion/react": "^11.11.3",
@@ -36,6 +37,7 @@
     "@typescript-eslint/eslint-plugin": "^6.19.0",
     "@typescript-eslint/parser": "^6.19.0",
     "@vitejs/plugin-react-swc": "^3.5.0",
+    "chromatic": "^10.3.1",
     "eslint": "^8.56.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.1.3",
@@ -47,5 +49,7 @@
     "storybook": "^7.6.10",
     "typescript": "^5.2.2",
     "vite": "^5.0.8"
-  }
+  },
+  "readme": "ERROR: No README data found!",
+  "_id": "herbs-or-weeds@0.0.0"
 }
