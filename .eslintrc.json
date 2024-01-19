@@ -18,7 +18,8 @@
     "@typescript-eslint",
     "prettier",
     "jsx-a11y",
-    "react-refresh"
+    "react-refresh",
+    "@tanstack/query"
   ],
   "settings": {
     "import/resolver": {
@@ -35,6 +36,9 @@
       "warn",
       { "allowConstantExport": true }
     ],
+    "@tanstack/query/exhaustive-deps": "error",
+    "@tanstack/query/prefer-query-object-syntax": "error",
+    "@tanstack/query/stable-query-client": "error",
 
     // react
     "react/prop-types": 0,
