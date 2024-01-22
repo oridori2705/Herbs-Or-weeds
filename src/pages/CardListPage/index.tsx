@@ -1,11 +1,9 @@
-import { useQueryClient } from '@tanstack/react-query'
 import { useState } from 'react'
 import useGetHerbList from '~/hooks/queries/useGetHerbList'
 import { HerbInfos } from '~/types/herbList'
 
 const CardListPage = () => {
   const [page, setPage] = useState(1)
-  const queryClient = useQueryClient()
 
   const herbList = useGetHerbList({ pageNo: page, numOfRows: 10 })
 
