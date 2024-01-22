@@ -10,7 +10,8 @@
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "chromatic": "npx chromatic --project-token=chpt_4c3b78240071b9a"
+    "chromatic": "npx chromatic --project-token=chpt_4c3b78240071b9a",
+    "server": "node ./src/server"
   },
   "dependencies": {
     "@emotion/react": "^11.11.3",
