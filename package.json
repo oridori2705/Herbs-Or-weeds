@@ -10,7 +10,8 @@
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "chromatic": "npx chromatic --project-token=chpt_4c3b78240071b9a"
+    "chromatic": "npx chromatic --project-token=chpt_4c3b78240071b9a",
+    "server": "node ./src/server"
   },
   "dependencies": {
     "@emotion/react": "^11.11.3",
@@ -18,9 +19,14 @@
     "@tanstack/react-query": "^5.17.15",
     "@tanstack/react-query-devtools": "^5.17.18",
     "axios": "^1.6.5",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.2",
+    "express": "^4.18.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.21.3"
+    "react-router-dom": "^6.21.3",
+    "request": "^2.88.2",
+    "xml-js": "^1.6.11"
   },
   "devDependencies": {
     "@storybook/addon-essentials": "^7.6.10",
@@ -32,6 +38,7 @@
     "@storybook/react-vite": "^7.6.10",
     "@storybook/test": "^7.6.10",
     "@tanstack/eslint-plugin-query": "^5.17.7",
+    "@types/cors": "^2.8.17",
     "@types/react": "^18.2.43",
     "@types/react-dom": "^18.2.17",
     "@typescript-eslint/eslint-plugin": "^6.19.0",
