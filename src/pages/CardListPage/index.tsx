@@ -22,7 +22,6 @@ const CardListPage = () => {
       <button
         onClick={() => {
           setPage(prev => prev + 1)
-          queryClient.invalidateQueries({ queryKey: ['herb'] })
         }}>
         다음페이지로
       </button>
