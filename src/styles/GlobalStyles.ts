@@ -79,7 +79,7 @@ const GlobalStyle = (theme: Theme) => css`
   }
   body {
     font-family: 'BMJUA';
-    background-color: ${theme.bgColor};
+    background: ${theme.bgGradient};
     color: ${theme.fontColor};
   }
   a {
