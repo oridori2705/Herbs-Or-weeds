@@ -10,8 +10,6 @@ const CardListContainer = styled.ul`
   margin: 0 auto;
   grid-template-columns: repeat(auto-fill, 200px);
   min-height: 100vh;
-  opacity: 1;
-  transition: opacity var(--filter-transition) ease-in-out;
   gap: 50px;
 `
 
