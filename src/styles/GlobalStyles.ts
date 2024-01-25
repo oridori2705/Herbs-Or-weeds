@@ -1,16 +1,17 @@
 import { css } from '@emotion/react'
 import { Theme } from './Theme'
-
+import BMJUA from '~/assets/fonts/BMJUA.ttf'
+import KCCMurukmuruk from '~/assets/fonts/KCCMurukmuruk.woff2'
 const GlobalStyle = (theme: Theme) => css`
   @font-face {
     font-family: 'Murukmuruk';
-    src: url('src/assets/fonts/KCC-Murukmuruk.ttf');
+    src: url(${KCCMurukmuruk});
     font-weight: normal;
     font-style: normal;
   }
   @font-face {
     font-family: 'BMJUA';
-    src: url('src/assets/fonts/BMJUA.ttf');
+    src: url(${BMJUA});
     font-weight: lighter;
     font-style: normal;
   }
