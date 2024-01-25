@@ -21,7 +21,7 @@ jobs:
           fetch-depth: 0
 
       - name: Set node linker to nodeModules
-        run: npm config set nodeLinker "node-modules"
+        run: npm config set linker "node-modules"
 
       - name: Install dependencies
         run: npm install --immutable --check-cache
