@@ -8,6 +8,7 @@ export interface HerbInfos {
   type: string
   name: string
   elements: HerbInfoItem[]
+  isHerb: boolean
 }
 
 export interface HerbInfoItem {
