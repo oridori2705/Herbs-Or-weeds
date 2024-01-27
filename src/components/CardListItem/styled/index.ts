@@ -36,9 +36,12 @@ export const CardContainer = styled.li<CardContainerProps>`
   transition: all 0.3s ease-out;
   transform: perspective(200px) rotateX(${props => props.tiltX}deg)
     rotateY(${props => props.tiltY}deg);
-  will-change: transform;
-  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.9);
+
   z-index: 1;
+
+  &:hover {
+    will-change: transform;
+  }
 
   ${props =>
     props.isHerb &&
@@ -66,7 +69,6 @@ export const CardContainer = styled.li<CardContainerProps>`
         filter: blur(8px);
         z-index: 0;
         animation: ${rgb} 6s linear infinite;
-        will-change: background-position;
       }
       &::after {
         content: '';
@@ -86,7 +88,6 @@ export const CardContainer = styled.li<CardContainerProps>`
         filter: brightness(1.5) opacity(${props.overlayX === 0 ? 0 : 0.3});
         background-size: 150% 150%;
         background-position: ${props.overlayX / 5 + props.overlayY / 5}%;
-        will-change: background-position;
         z-index: 5;
       }
     `}
