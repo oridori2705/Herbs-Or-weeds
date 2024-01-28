@@ -1,21 +1,32 @@
-import { useQuery } from '@tanstack/react-query'
+import { useInfiniteQuery } from '@tanstack/react-query'
 import { getHerbList } from '~/api/herbList'
-import { HerbInfos, HerbListPageParams } from '~/types/herbList'
+import { HerbList, HerbInfos } from '~/types/herbList'
 
-const useGetHerbList = ({ pageNo, numOfRows }: HerbListPageParams) => {
-  const result = useQuery({
-    queryKey: ['herb', { pageNo, numOfRows }],
-    queryFn: () => getHerbList({ pageNo, numOfRows }),
-    select: data => {
-      const isHerb = {
-        isHerb: true
+const useGetHerbList = (pageNo = 1, numOfRows = 10) => {
+  const { data, hasNextPage, isFetching, isFetchingNextPage, fetchNextPage } =
+    useInfiniteQuery<HerbList>({
+      queryKey: ['herb', { pageNo, numOfRows }],
+      queryFn: ({ pageParam = pageNo }) =>
+        getHerbList({ pageNo: pageParam as number, numOfRows }),
+      initialPageParam: 1,
+      getNextPageParam: (lastPage, allPages) => {
+        if (lastPage.length < numOfRows) return undefined
+
+        return allPages.length + 1
       }
-      const superHeroNames = data.map((d: HerbInfos) => ({ ...d, ...isHerb }))
-      return superHeroNames
-    }
-  })
+    })
 
-  return result
+  const isHerb = {
+    isHerb: true
+  }
+  const result = data?.pages.flat().map((d: HerbInfos) => ({ ...d, ...isHerb }))
+  return {
+    herbList: result || [],
+    isFetching,
+    isFetchingNextPage,
+    hasNextPage,
+    fetchNextPage
+  }
 }
 
 export default useGetHerbList
