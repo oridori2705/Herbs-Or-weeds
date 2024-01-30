@@ -1,10 +1,26 @@
 import { createBrowserRouter } from 'react-router-dom'
-
-import HomePage from '~/pages/MainPage'
+import CardListPage from '~/pages/CardListPage'
+import GamePage from '~/pages/GamePage'
+import MainPage from '~/pages/MainPage'
+import RootLayout from '~/pages/RootLayout'
 
 export const router = createBrowserRouter([
   {
     path: '/',
-    element: <HomePage />
+    element: <RootLayout />,
+    children: [
+      {
+        path: '/',
+        element: <MainPage />
+      },
+      {
+        path: '/picture',
+        element: <CardListPage />
+      },
+      {
+        path: '/game',
+        element: <GamePage />
+      }
+    ]
   }
 ])

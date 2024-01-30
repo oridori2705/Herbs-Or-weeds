@@ -73,7 +73,8 @@ const GlobalStyle = (theme: Theme) => css`
   textarea {
     border: none;
     outline: none;
-    background-color: ${theme.bgColor};
+    background-color: transparent;
+    color: ${theme.fontColor};
     &::placeholder {
       font-family: ${theme.fontColor};
     }
