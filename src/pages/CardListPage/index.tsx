@@ -1,28 +1,39 @@
 import styled from '@emotion/styled'
-import { useState } from 'react'
 import CardListItem from '~/components/CardListItem'
+import Skeleton from '~/components/Skeleton'
 import useGetHerbList from '~/hooks/queries/useGetHerbList'
+import useInfiniteScroll from '~/hooks/useInfiniteScroll'
 import { HerbInfos } from '~/types/herbList'
+import CardSkeleton from './Skeleton'
 
-const CardListContainer = styled.ul`
+export const CardListContainer = styled.ul`
   display: grid;
-  grid-auto-rows: min-content;
-  margin: 0 auto;
   grid-template-columns: repeat(auto-fill, 200px);
+  justify-content: center;
   min-height: 100vh;
   gap: 50px;
 `
 
 const CardListPage = () => {
-  const [page, setPage] = useState(1)
+  const {
+    herbList,
+    isFetching,
+    isFetchingNextPage,
+    hasNextPage,
+    fetchNextPage
+  } = useGetHerbList()
 
-  const herbList = useGetHerbList({ pageNo: page, numOfRows: 10 })
+  const refetch = () => {
+    if (hasNextPage) fetchNextPage()
+  }
+  const { ref } = useInfiniteScroll<HTMLDivElement>(refetch)
 
-  if (herbList.isLoading) return <div>로딩중...</div>
+  if (isFetching && !isFetchingNextPage) return <CardSkeleton />
   return (
-    <>
-      <CardListContainer>
-        {herbList.data.slice(0, -3).map((herb: HerbInfos) => (
+    <CardListContainer>
+      {herbList
+        .filter(data => data.name === 'item')
+        .map((herb: HerbInfos) => (
           <CardListItem
             key={herb.elements[1].elements[0].cdata}
             id={herb.elements[1].elements[0].cdata}
@@ -33,15 +44,12 @@ const CardListPage = () => {
             medicineName={herb.elements[3].elements[0].cdata}
           />
         ))}
-      </CardListContainer>
-
-      <button
-        onClick={() => {
-          setPage(prev => prev + 1)
-        }}>
-        다음페이지로
-      </button>
-    </>
+      <Skeleton.Card
+        width={200}
+        height={300}
+      />
+      <div ref={ref}></div>
+    </CardListContainer>
   )
 }
 export default CardListPage

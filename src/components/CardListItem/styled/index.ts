@@ -10,35 +10,22 @@ interface CardContainerProps {
   isHerb: boolean
 }
 
-const rgb = keyframes`
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-`
-
-export const Container = styled.div`
-  position: relative;
+export const CardContainer = styled.div<CardContainerProps>`
+  border-radius: 18px;
   width: 100%;
   height: 300px;
-`
-
-export const CardContainer = styled.li<CardContainerProps>`
-  border-radius: 18px;
   display: flex;
   flex-direction: column;
   position: relative;
   transition: all 0.3s ease-out;
   transform: perspective(200px) rotateX(${props => props.tiltX}deg)
     rotateY(${props => props.tiltY}deg);
-  will-change: transform;
-  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.9);
+
   z-index: 1;
+
+  &:hover {
+    will-change: transform;
+  }
 
   ${props =>
     props.isHerb &&
@@ -66,13 +53,17 @@ export const CardContainer = styled.li<CardContainerProps>`
         filter: blur(8px);
         z-index: 0;
         animation: ${rgb} 6s linear infinite;
-        will-change: background-position;
       }
-      &::after {
-        content: '';
-        position: absolute;
-        width: 100%;
-        height: 300px;
+    `}
+  &::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 300px;
+    z-index: 5;
+    ${props =>
+      props.isHerb &&
+      css`
         background: linear-gradient(
           120deg,
           transparent 10%,
@@ -86,10 +77,8 @@ export const CardContainer = styled.li<CardContainerProps>`
         filter: brightness(1.5) opacity(${props.overlayX === 0 ? 0 : 0.3});
         background-size: 150% 150%;
         background-position: ${props.overlayX / 5 + props.overlayY / 5}%;
-        will-change: background-position;
-        z-index: 5;
-      }
-    `}
+      `}
+  }
 `
 
 export const SeasonContainer = styled.div`
@@ -127,4 +116,16 @@ export const DescriptionContainer = styled.div`
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
   background: linear-gradient(#1d1d1d 0%, #fff0 70%, #fff0 100%);
+`
+
+const rgb = keyframes`
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 `

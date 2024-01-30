@@ -1,7 +1,6 @@
 import { useCallback, useRef, useState } from 'react'
 import {
   CardContainer,
-  Container,
   DescriptionContainer,
   ImageContainer,
   SeasonContainer
@@ -43,7 +42,6 @@ const CardListItem = ({
 
       const tiltX = (4 / 30) * y - 20
       const tiltY = (-1 / 5) * x + 20
-
       setTiltX(tiltX)
       setTiltY(tiltY)
     })
@@ -60,26 +58,24 @@ const CardListItem = ({
   }, [])
 
   return (
-    <Container>
-      <CardContainer
-        tiltX={tiltX}
-        tiltY={tiltY}
-        overlayX={overlayX}
-        overlayY={overlayY}
-        onMouseMove={handleMouseMove}
-        onMouseLeave={handleMouseLeave}
-        isHerb={isHerb}>
-        <SeasonContainer>
-          <ImageContainer img_src={image} />
-          <DescriptionContainer>
-            <p>{id}</p>
-            <h3>{name}</h3>
-            <p>{medicineName}</p>
-            <p>{scientificName}</p>
-          </DescriptionContainer>
-        </SeasonContainer>
-      </CardContainer>
-    </Container>
+    <CardContainer
+      tiltX={tiltX}
+      tiltY={tiltY}
+      overlayX={overlayX}
+      overlayY={overlayY}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      isHerb={isHerb}>
+      <SeasonContainer>
+        <ImageContainer img_src={image} />
+        <DescriptionContainer>
+          <p>{id}</p>
+          <h3>{name}</h3>
+          <p>{medicineName}</p>
+          <p>{scientificName}</p>
+        </DescriptionContainer>
+      </SeasonContainer>
+    </CardContainer>
   )
 }
 export default CardListItem
