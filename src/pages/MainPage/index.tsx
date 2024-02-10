@@ -1,9 +1,3 @@
-import CardListPage from '../CardListPage'
-
-export default function HomePage() {
-  return (
-    <section>
-      <CardListPage />
-    </section>
-  )
+export default function MainPage() {
+  return <section>메인 페이지</section>
 }
