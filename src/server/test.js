@@ -28,4 +28,23 @@ router.get('/', async (req, res) => {
   }
 })
 
+router.get('/search', async (req, res) => {
+  try {
+    const sText = req.query.sText
+    const response = await axios.get(url, {
+      params: {
+        apiKey,
+        sType: 'sCntntsSj',
+        sText
+      }
+    })
+
+    const xmlToJson = converter.xml2json(response.data)
+    res.send(xmlToJson)
+  } catch (error) {
+    console.error(error)
+    res.status(500).send('Internal Server Error')
+  }
+})
+
 export default router
