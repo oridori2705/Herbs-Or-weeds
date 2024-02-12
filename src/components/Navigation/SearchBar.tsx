@@ -2,7 +2,9 @@ import { ChangeEvent, FormEvent, useState } from 'react'
 import {
   Input,
   RecommendListLi,
+  RecommendListTitle,
   RecommendListUl,
+  RecommendResultStatus,
   SearchInputContainer,
   SvgContainer
 } from './styled'
@@ -11,6 +13,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import useGetHerbSearchList from '~/hooks/queries/useGetHerbSearchList'
 import useModal from '~/hooks/useModal'
 import boldSearchQuery from '~/utils/boldSearchQuery'
+import Spinner from '../Spinner'
 
 //TODO
 // 1. 추천검색어 키보드 이벤트 가능하도록
@@ -77,11 +80,13 @@ const SearchBar = () => {
       </form>
       {isShow && (
         <RecommendListUl ref={modalRef}>
-          <span>추천 검색어</span>
+          <RecommendListTitle>추천 검색어</RecommendListTitle>
 
           {isLoading ? (
-            <p>로딩중</p>
-          ) : (
+            <RecommendResultStatus>
+              <Spinner />
+            </RecommendResultStatus>
+          ) : data.length > 0 ? (
             data.map((data: RecommendListItem) => (
               <RecommendListLi key={data.No}>
                 <Link to={`/picture?name=${data.name}`}>
@@ -89,6 +94,10 @@ const SearchBar = () => {
                 </Link>
               </RecommendListLi>
             ))
+          ) : (
+            <RecommendResultStatus>
+              <p>없음</p>
+            </RecommendResultStatus>
           )}
         </RecommendListUl>
       )}

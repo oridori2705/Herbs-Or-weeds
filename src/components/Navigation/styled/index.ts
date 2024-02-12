@@ -4,6 +4,7 @@ export const Container = styled.section`
   position: fixed;
   display: flex;
   justify-content: center;
+  align-items: center;
   top: 10px;
   left: 0;
   width: 100%;
@@ -43,7 +44,7 @@ export const Input = styled.input`
 export const SvgContainer = styled.div`
   position: absolute;
   right: 0;
-  top: -5px;
+  top: -8px;
   transform: translate(-50%, calc(50%));
 `
 export const SearchBarContainer = styled.div`
@@ -77,14 +78,33 @@ export const RecommendListUl = styled.ul`
   position: absolute;
   top: 40px;
   width: 100%;
-  padding: 5px 0 5px 7px;
+
   display: flex;
   flex-direction: column;
-  background-color: gray;
+  background: rgb(40, 42, 46);
   border-radius: 10px;
 `
 export const RecommendListLi = styled.li`
   display: flex;
   flex-direction: column;
-  padding: 4px 0;
+  padding: 5px 0 5px 7px;
+  &:hover {
+    background: rgb(29, 30, 33);
+    &:last-child {
+      border-bottom-left-radius: 15px;
+      border-bottom-right-radius: 15px;
+    }
+  }
+`
+export const RecommendListTitle = styled.span`
+  padding-left: 5px;
+  font-size: 13px;
+`
+
+export const RecommendResultStatus = styled.div`
+  display: flex;
+  padding: 5px 0 5px 7px;
+  justify-content: center;
+  align-items: center;
+  color: rgba(255, 255, 255, 0.7);
 `
