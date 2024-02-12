@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, useEffect, useRef, useState } from 'react'
+import { ChangeEvent, FormEvent, useState } from 'react'
 import {
   Input,
   RecommendListLi,
@@ -9,10 +9,10 @@ import {
 import useDebounce from '~/hooks/useDebounce'
 import { Link, useNavigate } from 'react-router-dom'
 import useGetHerbSearchList from '~/hooks/queries/useGetHerbSearchList'
+import useModal from '~/hooks/useModal'
 
 //TODO
 // 1. 추천검색어 키보드 이벤트 가능하도록
-
 interface RecommendListItem {
   No: number
   name: string
@@ -20,8 +20,7 @@ interface RecommendListItem {
 
 const SearchBar = () => {
   const [searchQuery, setSearchQuery] = useState<string>('')
-  const modalRef = useRef<HTMLUListElement | null>(null)
-  const [isShow, setIsShow] = useState(false)
+  const { modalRef, isShow, setIsShow } = useModal()
   const navigate = useNavigate()
 
   const { data, isLoading } = useGetHerbSearchList(searchQuery)
@@ -30,17 +29,6 @@ const SearchBar = () => {
     e.preventDefault()
     navigate(`/picture?name=${e.currentTarget.search.value}`)
     setIsShow(false)
-  }
-
-  const handleOutsideClick = (e: MouseEvent) => {
-    const isOutsideClick =
-      modalRef.current &&
-      e.target instanceof Element &&
-      !modalRef.current.contains(e.target)
-
-    if (isOutsideClick) {
-      setIsShow(false)
-    }
   }
 
   const handleChange = async (e: ChangeEvent<HTMLInputElement>) => {
@@ -73,18 +61,6 @@ const SearchBar = () => {
 
     return text
   }
-
-  useEffect(() => {
-    if (isShow) {
-      document.addEventListener('mousedown', handleOutsideClick)
-    } else {
-      document.removeEventListener('mousedown', handleOutsideClick)
-    }
-
-    return () => {
-      document.removeEventListener('mousedown', handleOutsideClick)
-    }
-  }, [isShow])
 
   return (
     <SearchInputContainer>
