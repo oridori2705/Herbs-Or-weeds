@@ -45,6 +45,6 @@ export default App
 
 const MainContainer = styled.div`
   margin: 0 auto;
-  margin-top: 100px;
+  margin-top: 55px;
   max-width: 780px;
 `

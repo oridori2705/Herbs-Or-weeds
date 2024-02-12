@@ -1,60 +1,58 @@
-import { ChangeEvent, FormEvent, useState } from 'react'
-import { Input, SvgContainer } from './styled'
-import { getSearchData } from '~/api/searchHerb'
+import { ChangeEvent, FormEvent, useEffect, useRef, useState } from 'react'
+import {
+  Input,
+  RecommendListLi,
+  RecommendListUl,
+  SearchInputContainer,
+  SvgContainer
+} from './styled'
 import useDebounce from '~/hooks/useDebounce'
-import { HerbInfos } from '~/types/herbList'
-import styled from '@emotion/styled'
+import { Link, useNavigate } from 'react-router-dom'
+import useGetHerbSearchList from '~/hooks/queries/useGetHerbSearchList'
 
-const SearchInputContainer = styled.div`
-  position: relative;
-`
+//TODO
+// 1. 추천검색어 키보드 이벤트 가능하도록
 
-const RecommendListUl = styled.ul`
-  position: absolute;
-  top: 40px;
-  width: 100%;
-  padding: 5px 0 5px 7px;
-  display: flex;
-  flex-direction: column;
-  background-color: gray;
-  border-radius: 10px;
-`
-const RecommendListLi = styled.li`
-  display: flex;
-  flex-direction: column;
-  padding: 4px 0;
-`
 interface RecommendListItem {
   No: number
   name: string
 }
 
 const SearchBar = () => {
-  const [recommendList, setRecommendList] = useState([])
   const [searchQuery, setSearchQuery] = useState<string>('')
+  const modalRef = useRef<HTMLUListElement | null>(null)
+  const [isShow, setIsShow] = useState(false)
+  const navigate = useNavigate()
+
+  const { data, isLoading } = useGetHerbSearchList(searchQuery)
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    navigate(`/picture?name=${e.currentTarget.search.value}`)
+    setIsShow(false)
+  }
+
+  const handleOutsideClick = (e: MouseEvent) => {
+    const isOutsideClick =
+      modalRef.current &&
+      e.target instanceof Element &&
+      !modalRef.current.contains(e.target)
+
+    if (isOutsideClick) {
+      setIsShow(false)
+    }
   }
 
   const handleChange = async (e: ChangeEvent<HTMLInputElement>) => {
-    const query = e.target.value.trim()
-    setSearchQuery(query)
+    const query = e.target.value
 
     if (query === '') {
+      setIsShow(false)
+      setSearchQuery(() => query)
       return
     }
-
-    const result = await getSearchData(query)
-    const recommendData = result
-      .filter((data: HerbInfos) => data.name === 'item')
-      .map((data: HerbInfos) => {
-        return {
-          No: Number(data.elements[1].elements[0].cdata),
-          name: data.elements[2].elements[0].cdata
-        }
-      })
-    setRecommendList(recommendData)
+    setSearchQuery(() => query)
+    setIsShow(true)
   }
   const debouncedOnChange = useDebounce<typeof handleChange>(handleChange, 500)
 
@@ -75,6 +73,18 @@ const SearchBar = () => {
 
     return text
   }
+
+  useEffect(() => {
+    if (isShow) {
+      document.addEventListener('mousedown', handleOutsideClick)
+    } else {
+      document.removeEventListener('mousedown', handleOutsideClick)
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleOutsideClick)
+    }
+  }, [isShow])
 
   return (
     <SearchInputContainer>
@@ -105,14 +115,21 @@ const SearchBar = () => {
           </SvgContainer>
         </button>
       </form>
-      {recommendList.length > 0 && (
-        <RecommendListUl>
+      {isShow && (
+        <RecommendListUl ref={modalRef}>
           <span>추천 검색어</span>
-          {recommendList.map((data: RecommendListItem) => (
-            <RecommendListLi key={data.No}>
-              {boldSearchQuery(data.name, searchQuery)}
-            </RecommendListLi>
-          ))}
+
+          {isLoading ? (
+            <p>로딩중</p>
+          ) : (
+            data.map((data: RecommendListItem) => (
+              <RecommendListLi key={data.No}>
+                <Link to={`/picture?name=${data.name}`}>
+                  {boldSearchQuery(data.name, searchQuery)}
+                </Link>
+              </RecommendListLi>
+            ))
+          )}
         </RecommendListUl>
       )}
     </SearchInputContainer>

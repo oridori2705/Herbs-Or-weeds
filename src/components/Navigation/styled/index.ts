@@ -68,3 +68,23 @@ export const NavContent = styled.div`
     border-bottom: 1px solid #fff;
   }
 `
+
+export const SearchInputContainer = styled.div`
+  position: relative;
+`
+
+export const RecommendListUl = styled.ul`
+  position: absolute;
+  top: 40px;
+  width: 100%;
+  padding: 5px 0 5px 7px;
+  display: flex;
+  flex-direction: column;
+  background-color: gray;
+  border-radius: 10px;
+`
+export const RecommendListLi = styled.li`
+  display: flex;
+  flex-direction: column;
+  padding: 4px 0;
+`

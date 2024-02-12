@@ -2,11 +2,13 @@ import axios from 'axios'
 import { HerbListPageParams } from '~/types/herbList'
 
 export const getHerbList = async ({
+  searchData = '',
   pageNo,
   numOfRows
 }: HerbListPageParams) => {
   const response = await axios.get('http://localhost:5000/api', {
     params: {
+      searchData,
       pageNo,
       numOfRows
     }

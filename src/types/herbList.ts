@@ -1,7 +1,9 @@
 export interface HerbListPageParams {
-  pageNo: number
-  numOfRows: number
+  searchData?: string | null
+  pageNo?: number
+  numOfRows?: number
 }
+
 export type HerbList = HerbInfos[]
 
 export interface HerbInfos {
