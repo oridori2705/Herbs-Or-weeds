@@ -3,7 +3,6 @@ import { getHerbList } from '~/api/herbList'
 import { HerbInfos } from '~/types/herbList'
 
 const useGetHerbSearchList = (query: string) => {
-  console.log(query)
   const result = useQuery({
     queryKey: ['searchHerb', { query }],
     queryFn: () => getHerbList({ searchData: query }),
