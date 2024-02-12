@@ -10,9 +10,11 @@ import useDebounce from '~/hooks/useDebounce'
 import { Link, useNavigate } from 'react-router-dom'
 import useGetHerbSearchList from '~/hooks/queries/useGetHerbSearchList'
 import useModal from '~/hooks/useModal'
+import boldSearchQuery from '~/utils/boldSearchQuery'
 
 //TODO
 // 1. 추천검색어 키보드 이벤트 가능하도록
+// 2. 추천검색어 이후 Link가 아닌 button으로 바꿔야 함 -> 추천 검색어 클릭시 모달 close되어야 됨, 키보드 이벤트시 button이벤트로 해야됨
 interface RecommendListItem {
   No: number
   name: string
@@ -43,24 +45,6 @@ const SearchBar = () => {
     setIsShow(true)
   }
   const debouncedOnChange = useDebounce<typeof handleChange>(handleChange, 500)
-
-  const boldSearchQuery = (text: string, query: string): React.ReactNode => {
-    const index = text.toLowerCase().indexOf(query.toLowerCase())
-
-    if (index !== -1) {
-      return (
-        <div style={{ display: 'flex' }}>
-          {text.substring(0, index)}
-          <strong style={{ color: 'lightgreen' }}>
-            {text.substring(index, index + query.length)}
-          </strong>
-          {text.substring(index + query.length)}
-        </div>
-      )
-    }
-
-    return text
-  }
 
   return (
     <SearchInputContainer>
