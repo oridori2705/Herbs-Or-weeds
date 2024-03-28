@@ -10,12 +10,16 @@ const apiKey = process.env.VITE_API_KEY
 
 router.get('/', async (req, res) => {
   try {
+    const sText = req.query.searchData
+
     const pageNo = req.query.pageNo
     const numOfRows = req.query.numOfRows
 
     const response = await axios.get(url, {
       params: {
         apiKey,
+        sType: 'sCntntsSj',
+        sText,
         pageNo,
         numOfRows
       }

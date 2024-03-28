@@ -11,7 +11,6 @@ const useInfiniteScroll = <T extends Element>(
       entries => entries.forEach(entry => entry.isIntersecting && callback()),
       options || { threshold: 0.5 }
     )
-
     const target = ref && ref.current
 
     if (!target) return
