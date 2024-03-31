@@ -23,7 +23,7 @@ const ModalComponent = ({ isOpen, close, children }: ModalComponentProps) => {
       />
       <ModalContent isOpen={isOpen}>{children}</ModalContent>
     </>,
-    document.getElementById('root')!
+    document.body
   )
 }
 
