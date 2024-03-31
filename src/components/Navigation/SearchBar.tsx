@@ -31,7 +31,7 @@ const SearchBar = () => {
   const { data, isLoading } = useGetHerbSearchList(searchQuery)
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
+    e.preventDefault() 
     navigate(`/picture?name=${e.currentTarget.search.value}`)
     setIsShow(false)
   }
@@ -86,7 +86,7 @@ const SearchBar = () => {
             <RecommendResultStatus>
               <Spinner />
             </RecommendResultStatus>
-          ) : data.length > 0 ? (
+          ) : data && data.length > 0 ? (
             data.map((data: RecommendListItem) => (
               <RecommendListLi key={data.No}>
                 <Link to={`/picture?name=${data.name}`}>
