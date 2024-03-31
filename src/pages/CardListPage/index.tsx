@@ -5,7 +5,7 @@ import useGetHerbList from '~/hooks/queries/useGetHerbList'
 import useInfiniteScroll from '~/hooks/useInfiniteScroll'
 import { HerbInfos } from '~/types/herbList'
 import CardSkeleton from './Skeleton'
-import { useSearchParams } from 'react-router-dom'
+import { Outlet, useSearchParams } from 'react-router-dom'
 
 export const CardListContainer = styled.ul`
   display: grid;
@@ -44,7 +44,6 @@ const CardListPage = () => {
       <SearchResultContainer>
         {searchQuery && <h2>"{searchQuery}" 검색 결과</h2>}
       </SearchResultContainer>
-
       <CardListContainer>
         {herbList
           .filter(data => data.name === 'item')
@@ -70,6 +69,7 @@ const CardListPage = () => {
         )}
         <div ref={ref}></div>
       </CardListContainer>
+      <Outlet/>
     </>
   )
 }

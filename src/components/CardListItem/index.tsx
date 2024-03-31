@@ -5,6 +5,7 @@ import {
   ImageContainer,
   SeasonContainer
 } from './styled'
+import { Link } from 'react-router-dom'
 interface CardListItemProps {
   id: string
   name: string
@@ -58,24 +59,26 @@ const CardListItem = ({
   }, [])
 
   return (
-    <CardContainer
-      tiltX={tiltX}
-      tiltY={tiltY}
-      overlayX={overlayX}
-      overlayY={overlayY}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      isHerb={isHerb}>
-      <SeasonContainer>
-        <ImageContainer img_src={image} />
-        <DescriptionContainer>
-          <p>{id}</p>
-          <h3>{name}</h3>
-          <p>{medicineName}</p>
-          <p>{scientificName}</p>
-        </DescriptionContainer>
-      </SeasonContainer>
-    </CardContainer>
+    <Link to={`/picture/${id}`}>
+      <CardContainer
+        tiltX={tiltX}
+        tiltY={tiltY}
+        overlayX={overlayX}
+        overlayY={overlayY}
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
+        isHerb={isHerb}>
+        <SeasonContainer>
+          <ImageContainer img_src={image} />
+          <DescriptionContainer>
+            <p>{id}</p>
+            <h3>{name}</h3>
+            <p>{medicineName}</p>
+            <p>{scientificName}</p>
+          </DescriptionContainer>
+        </SeasonContainer>
+      </CardContainer>
+    </Link>
   )
 }
 export default CardListItem
