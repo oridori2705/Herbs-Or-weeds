@@ -11,9 +11,9 @@ import {
 import useDebounce from '~/hooks/useDebounce'
 import { Link, useNavigate } from 'react-router-dom'
 import useGetHerbSearchList from '~/hooks/queries/useGetHerbSearchList'
-import useModal from '~/hooks/useModal'
 import boldSearchQuery from '~/utils/boldSearchQuery'
 import Spinner from '../Spinner'
+import useDropBox from '~/hooks/useDropBox'
 
 //TODO
 // 1. 추천검색어 키보드 이벤트 가능하도록
@@ -25,7 +25,7 @@ interface RecommendListItem {
 
 const SearchBar = () => {
   const [searchQuery, setSearchQuery] = useState<string>('')
-  const { modalRef, isShow, setIsShow } = useModal()
+  const { modalRef, isShow, setIsShow } = useDropBox()
   const navigate = useNavigate()
 
   const { data, isLoading } = useGetHerbSearchList(searchQuery)

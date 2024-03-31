@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 
-const useModal = () => {
+const useDropBox = () => {
   const modalRef = useRef<HTMLUListElement | null>(null)
   const [isShow, setIsShow] = useState(false)
 
@@ -29,4 +29,4 @@ const useModal = () => {
 
   return { modalRef, isShow, setIsShow }
 }
-export default useModal
+export default useDropBox

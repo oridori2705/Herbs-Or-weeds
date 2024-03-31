@@ -9,7 +9,7 @@ export const Container = styled.section`
   left: 0;
   width: 100%;
 
-  z-index: 999;
+  z-index: 10;
   @media (max-width: 360px) {
     max-width: 360px;
   }
