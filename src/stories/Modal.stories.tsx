@@ -1,4 +1,4 @@
-import { Global, ThemeProvider, useTheme } from "@emotion/react";
+import { Global, ThemeProvider } from "@emotion/react";
 import useModal from "~/hooks/useModal";
 import GlobalStyle from "~/styles/GlobalStyles";
 import { default as THEME } from '~/styles/Theme'
