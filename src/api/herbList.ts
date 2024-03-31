@@ -1,12 +1,12 @@
 import axios from 'axios'
-import { HerbListPageParams } from '~/types/herbList'
+import { HerbList, HerbListPageParams } from '~/types/herbList'
 
 export const getHerbList = async ({
   searchData = '',
   pageNo,
   numOfRows
-}: HerbListPageParams) => {
-  const response = await axios.get('/api/proxy', {
+}: HerbListPageParams): Promise<HerbList> => {
+  const response = await axios.get('http://localhost:5000/api', {
     params: {
       searchData,
       pageNo,
