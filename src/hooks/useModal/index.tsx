@@ -17,11 +17,15 @@ interface ModalComponentProps {
   children: ReactNode
   isOpen: boolean
   isAnimating: boolean
+  width?: number
+  height?: number
   close: () => void
 }
 
 const ModalComponent = ({
   isOpen,
+  width = 70,
+  height = 70,
   isAnimating,
   close,
   children
@@ -34,7 +38,12 @@ const ModalComponent = ({
         isOpen={isAnimating}
         onClick={close}
       />
-      <ModalContent isOpen={isAnimating}>{children}</ModalContent>
+      <ModalContent
+        width={width}
+        height={height}
+        isOpen={isAnimating}>
+        {children}
+      </ModalContent>
     </>,
     document.body
   )
