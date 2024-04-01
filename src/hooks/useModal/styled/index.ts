@@ -15,8 +15,7 @@ export const ModalOverlay = styled.div<ModalOverlayAndContentProps>`
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 40;
   transition: opacity 1s ease;
-  opacity: ${props => (props.isOpen ? 100 : 0)};
-  transform: translateX(${props => (props.isOpen ? 0 : '100vw')});
+  opacity: ${props => (props.isOpen ? 0.99 : 0)};
 `
 
 export const ModalContent = styled.div<ModalOverlayAndContentProps>`
@@ -30,11 +29,10 @@ export const ModalContent = styled.div<ModalOverlayAndContentProps>`
   margin: auto;
   border-radius: 0.5rem;
   background-color: white;
-  z-index: 40;
+  z-index: 50;
   color: black;
   overflow: scroll;
   -ms-overflow-style: none;
-
   scrollbar-width: none;
   transform: translateY(${props => (props.isOpen ? 0 : '100vh')});
   transition: transform 1s ease;

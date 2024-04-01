@@ -1,38 +1,73 @@
-import { ReactNode, useState } from 'react'
+import { ReactNode, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { ModalContent, ModalOverlay } from './styled'
 
 interface UseModalResult {
-  Modal: ({ children , isOpen, close}:ModalComponentProps) => JSX.Element
+  Modal: ({
+    children,
+    isOpen,
+    close
+  }: ModalComponentProps) => JSX.Element | null
   open: () => void
   close: () => void
   isOpen: boolean
+  isAnimating: boolean
 }
 interface ModalComponentProps {
   children: ReactNode
   isOpen: boolean
+  isAnimating: boolean
   close: () => void
 }
 
-const ModalComponent = ({ isOpen, close, children }: ModalComponentProps) => {
+const ModalComponent = ({
+  isOpen,
+  isAnimating,
+  close,
+  children
+}: ModalComponentProps) => {
+  if (!isOpen) return null
+
   return createPortal(
     <>
       <ModalOverlay
-        isOpen={isOpen}
+        isOpen={isAnimating}
         onClick={close}
       />
-      <ModalContent isOpen={isOpen}>{children}</ModalContent>
+      <ModalContent isOpen={isAnimating}>{children}</ModalContent>
     </>,
     document.body
   )
 }
 
-export const useModal = (initialValue = false) :UseModalResult => {
+export const useModal = (initialValue = false): UseModalResult => {
   const [isOpen, setOpen] = useState<boolean>(initialValue)
+  const [isAnimating, setAnimating] = useState(false)
 
-  const open = () => setOpen(true)
-  const close = () => setOpen(false)
+  const isLoading = useRef<boolean>(false)
 
-  return { Modal: ModalComponent, open, close, isOpen }
+  const open = () => {
+    if (isLoading.current) return
+
+    setOpen(true)
+    isLoading.current = true
+    window.setTimeout(() => {
+      setAnimating(true)
+      isLoading.current = false
+    }, 0)
+  }
+
+  const close = () => {
+    if (isLoading.current) return
+
+    setAnimating(false)
+    isLoading.current = true
+    window.setTimeout(() => {
+      setOpen(false)
+      isLoading.current = false
+    }, 1000)
+  }
+
+  return { Modal: ModalComponent, open, close, isOpen, isAnimating }
 }
 export default useModal
