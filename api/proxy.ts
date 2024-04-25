@@ -21,5 +21,5 @@ export default async function (req: VercelRequest, res: VercelResponse) {
   })
   const xmlToJson = converter.xml2json(data)
 
-  return res.status(200).json(xmlToJson)
+  res.send(xmlToJson)
 }

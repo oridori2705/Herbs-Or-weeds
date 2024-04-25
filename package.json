@@ -10,6 +10,7 @@
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
+    "vercel": "vercel dev --listen 5000",
     "chromatic": "npx chromatic --project-token=chpt_4c3b78240071b9a",
     "server": "node ./src/server"
   },
