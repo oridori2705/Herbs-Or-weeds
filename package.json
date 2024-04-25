@@ -10,6 +10,7 @@
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
+    "vercel": "vercel dev --listen 5000",
     "chromatic": "npx chromatic --project-token=chpt_4c3b78240071b9a",
     "server": "node ./src/server"
   },
@@ -54,8 +55,15 @@
     "eslint-plugin-storybook": "^0.6.15",
     "prettier": "^3.2.4",
     "storybook": "^7.6.10",
-    "typescript": "^5.2.2",
+    "typescript": "^5.4.5",
+    "vercel": "^34.1.2",
     "vite": "^5.0.8"
+  },
+  "overrides": {
+    "@vercel/node": {
+      "ts-node": "10.9.1",
+      "typescript": "5.4.5"
+    }
   },
   "readme": "ERROR: No README data found!",
   "_id": "herbs-or-weeds@0.0.0"
