@@ -1,4 +1,5 @@
 import axios from 'axios'
+import converter from 'xml-js'
 import type { VercelRequest, VercelResponse } from '@vercel/node'
 
 const apiUrl = process.env.VITE_API_BASE_URL
@@ -18,6 +19,7 @@ export default async function (req: VercelRequest, res: VercelResponse) {
       numOfRows
     }
   })
+  const xmlToJson = converter.xml2json(data)
 
-  return res.status(200).json(data)
+  return res.status(200).json(xmlToJson)
 }
