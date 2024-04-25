@@ -1,14 +1,12 @@
 import axios from 'axios'
 import { HerbListPageParams } from '~/types/herbList'
 
-const apiUrl = import.meta.env.VITE_API_BASE_URL
-
 export const getHerbList = async ({
   searchData = '',
   pageNo,
   numOfRows
 }: HerbListPageParams) => {
-  const response = await axios.get(apiUrl, {
+  const response = await axios.get('/api/proxy', {
     params: {
       searchData,
       pageNo,
