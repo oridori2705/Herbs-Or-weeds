@@ -5,7 +5,7 @@ import {
   ImageContainer,
   SeasonContainer
 } from './styled'
-import { Link } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 interface CardListItemProps {
   id: string
   name: string
@@ -28,6 +28,9 @@ const CardListItem = ({
   const [overlayX, setOverlayX] = useState(0)
   const [overlayY, setOverlayY] = useState(0)
   const animationFrameIdRef = useRef(0)
+
+  const [searchParams] = useSearchParams()
+  const searchQuery = searchParams.get('name')
 
   const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
     if (animationFrameIdRef.current) {
@@ -59,7 +62,7 @@ const CardListItem = ({
   }, [])
 
   return (
-    <Link to={`/picture/${id}`}>
+    <Link to={`/picture/${id}${searchQuery ? `?name=${searchQuery}` : ``}`}>
       <CardContainer
         tiltX={tiltX}
         tiltY={tiltY}

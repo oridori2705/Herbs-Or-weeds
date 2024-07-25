@@ -6,7 +6,7 @@ export const getHerbList = async ({
   pageNo,
   numOfRows
 }: HerbListPageParams): Promise<HerbList> => {
-  const response = await axios.get('http://localhost:5000/api', {
+  const response = await axios.get('/api/proxy', {
     params: {
       searchData,
       pageNo,
