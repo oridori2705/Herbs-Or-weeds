@@ -45,27 +45,33 @@ const CardListPage = () => {
         {searchQuery && <h2>"{searchQuery}" 검색 결과</h2>}
       </SearchResultContainer>
       <CardListContainer>
-        {herbList
-          .filter(data => data.name === 'item')
-          .map((herb: HerbInfos) => (
-            <CardListItem
-              key={herb.elements[1].elements[0].cdata}
-              id={herb.elements[1].elements[0].cdata}
-              image={herb.elements[4].elements[0].cdata}
-              isHerb={herb.isHerb}
-              scientificName={herb.elements[0].elements[0].cdata}
-              name={herb.elements[2].elements[0].cdata}
-              medicineName={herb.elements[3].elements[0].cdata}
-            />
-          ))}
-        {isFetching && (
+        {isFetching && !isFetchingNextPage ? (
           <Skeleton.Card
             width={200}
             height={300}
           />
-        )}
-        {!isFetching && !hasNextPage && (
-          <div>이제 볼 수 있는 결과가 없어요.</div>
+        ) : (
+          <>
+            {herbList
+              .filter(data => data.name === 'item')
+              .map((herb: HerbInfos) => (
+                <CardListItem
+                  key={herb.elements[1].elements[0].cdata}
+                  id={herb.elements[1].elements[0].cdata}
+                  image={herb.elements[4].elements[0].cdata}
+                  isHerb={herb.isHerb}
+                  scientificName={herb.elements[0].elements[0].cdata}
+                  name={herb.elements[2].elements[0].cdata}
+                  medicineName={herb.elements[3].elements[0].cdata}
+                />
+              ))}
+            {!hasNextPage && !isFetching && (
+              <div>이제 볼 수 있는 결과가 없어요.</div>
+            )}
+            {herbList.length === 0 && !isFetching && (
+              <div>아무것도 없네요!</div>
+            )}
+          </>
         )}
         <div ref={ref}></div>
       </CardListContainer>
