@@ -12,7 +12,7 @@ export const CardListContainer = styled.ul`
   grid-template-columns: repeat(auto-fill, 200px);
   grid-template-rows: 300px;
   justify-content: center;
-  min-height: 100vh;
+
   gap: 50px;
 `
 
@@ -69,7 +69,7 @@ const CardListPage = () => {
         )}
         <div ref={ref}></div>
       </CardListContainer>
-      <Outlet/>
+      <Outlet />
     </>
   )
 }
