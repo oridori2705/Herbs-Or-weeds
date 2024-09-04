@@ -42,7 +42,7 @@ const CardListPage = () => {
   return (
     <>
       <SearchResultContainer>
-        {searchQuery && <h2>"{searchQuery}" 검색 결과</h2>}
+        {searchQuery && <h2>&quot;{searchQuery}&quot; 검색 결과</h2>}
       </SearchResultContainer>
       <CardListContainer>
         {isFetching && !isFetchingNextPage ? (

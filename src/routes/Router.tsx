@@ -19,8 +19,8 @@ export const router = createBrowserRouter([
         element: <CardListPage />,
         children: [
           {
-            path:'/picture/:pictureId',
-            element: <CardDetail/>
+            path: '/picture/:pictureId',
+            element: <CardDetail />
           }
         ]
       },

@@ -3,16 +3,20 @@
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:react/recommended",
-    "plugin:prettier/recommended",
+    "plugin:prettier/recommended"
   ],
-  "plugins": [
-    "react",
-    "prettier"
-  ],
-//   "rules": {
-//     "react/react-in-jsx-scope": "off"
-// },
+  "plugins": ["react", "prettier", "@typescript-eslint"],
+  "rules": {
+    "react/react-in-jsx-scope": "off"
+  },
+  "parser": "@typescript-eslint/parser", // parser를 최상위로 이동
   "parserOptions": {
-    "parser": "@typescript-eslint/parser"
+    "ecmaVersion": 2021, // 추가: 원하는 ECMAScript 버전
+    "sourceType": "module" // 추가: 모듈 형식 사용
+  },
+  "settings": {
+    "react": {
+      "version": "detect" // React 버전을 자동으로 감지하도록 설정
+    }
   }
 }

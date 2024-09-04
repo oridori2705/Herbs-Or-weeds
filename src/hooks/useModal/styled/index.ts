@@ -19,7 +19,7 @@ export const ModalOverlay = styled.div<ModalOverlayAndContentProps>`
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 50;
-  transition: opacity 1s ease;
+  transition: opacity 0.5s ease;
   opacity: ${props => (props.isOpen ? 0.99 : 0)};
 `
 
@@ -40,7 +40,7 @@ export const ModalContent = styled.div<ModalContentProps>`
   -ms-overflow-style: none;
   scrollbar-width: none;
   transform: translateY(${props => (props.isOpen ? 0 : '100vh')});
-  transition: transform 1s ease;
+  transition: transform 0.5s ease;
   &::-webkit-scrollbar {
     display: none;
   }
