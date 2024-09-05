@@ -37,9 +37,7 @@ const ModalComponent = ({
 
   useEffect(() => {
     if (isOpen) {
-      window.setTimeout(() => {
-        setIsAnimating(true)
-      }, 20)
+      setIsAnimating(true)
     }
   }, [isOpen])
 
@@ -49,13 +47,13 @@ const ModalComponent = ({
           <ModalOverlay
             isOpen={isAnimating}
             onClick={() => setIsAnimating(false)}
-            onTransitionEnd={handleTransitionEnd}
+            onAnimationEnd={handleTransitionEnd}
           />
           <ModalContent
             width={width}
             height={height}
             isOpen={isAnimating}
-            onTransitionEnd={handleTransitionEnd}>
+            onAnimationEnd={handleTransitionEnd}>
             {children}
           </ModalContent>
         </>,
