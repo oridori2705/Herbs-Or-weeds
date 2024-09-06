@@ -11,7 +11,7 @@ const useGetHerbList = ({
     useInfiniteQuery({
       queryKey: ['herb', { searchData, pageNo, numOfRows }],
       queryFn: ({ pageParam = pageNo }) =>
-        getHerbList({ searchData, pageNo: pageParam , numOfRows }),
+        getHerbList({ searchData, pageNo: pageParam, numOfRows }),
       initialPageParam: 1,
       getNextPageParam: (lastPage, allPages) => {
         if (lastPage.length < numOfRows) return undefined

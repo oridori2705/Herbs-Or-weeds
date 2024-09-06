@@ -1,11 +1,15 @@
 import { useEffect, useRef } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
+import Spinner from '~/components/Spinner'
+import useGetHerbDetail from '~/hooks/queries/useGetHerbDetail'
 import useModal from '~/hooks/useModal'
 
 const CardDetail = () => {
   const { Modal, open, close, isOpen } = useModal()
   const timeOutId = useRef<number | null>(null)
   const navigate = useNavigate()
+  const { pictureId } = useParams()
+  const { data, isFetching } = useGetHerbDetail(Number(pictureId))
 
   useEffect(() => {
     open()
@@ -25,7 +29,13 @@ const CardDetail = () => {
       <Modal
         isOpen={isOpen}
         close={handleClose}>
-        <div>Modal 테스트</div>
+        {isFetching ? (
+          <Spinner />
+        ) : (
+          <div>
+            <img src={data?.imgUrl1} />
+          </div>
+        )}
       </Modal>
     </div>
   )
