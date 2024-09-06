@@ -52,19 +52,19 @@ export interface HerbDetail {
   imgUrl6?: string
 }
 
-export interface CdataElement {
+export interface HerbDetailCdataElement {
   type: 'cdata'
   cdata: string
 }
 
-export interface Element {
+export interface HerbDetailElement {
   type: 'element'
   name: string
-  elements?: CdataElement[]
+  elements?: HerbDetailCdataElement[]
 }
 
 export interface HerbDetailAPiResponse {
   type: 'element'
   name: string
-  elements?: CdataElement[]
+  elements?: HerbDetailCdataElement[]
 }
