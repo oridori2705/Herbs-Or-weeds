@@ -6,6 +6,7 @@ import useInfiniteScroll from '~/hooks/useInfiniteScroll'
 import { HerbInfos } from '~/types/herbList'
 import CardSkeleton from './Skeleton'
 import { Outlet, useSearchParams } from 'react-router-dom'
+import LinkCardListItem from '~/components/LinkCardListItem'
 
 export const CardListContainer = styled.ul`
   display: grid;
@@ -55,15 +56,18 @@ const CardListPage = () => {
             {herbList
               .filter(data => data.name === 'item')
               .map((herb: HerbInfos) => (
-                <CardListItem
+                <LinkCardListItem
                   key={herb.elements[1].elements[0].cdata}
-                  id={herb.elements[1].elements[0].cdata}
-                  image={herb.elements[4].elements[0].cdata}
-                  isHerb={herb.isHerb}
-                  scientificName={herb.elements[0].elements[0].cdata}
-                  name={herb.elements[2].elements[0].cdata}
-                  medicineName={herb.elements[3].elements[0].cdata}
-                />
+                  id={herb.elements[1].elements[0].cdata}>
+                  <CardListItem
+                    id={herb.elements[1].elements[0].cdata}
+                    image={herb.elements[4].elements[0].cdata}
+                    isHerb={herb.isHerb}
+                    scientificName={herb.elements[0].elements[0].cdata}
+                    name={herb.elements[2].elements[0].cdata}
+                    medicineName={herb.elements[3].elements[0].cdata}
+                  />
+                </LinkCardListItem>
               ))}
             {!hasNextPage && !isFetching && (
               <div>이제 볼 수 있는 결과가 없어요.</div>
