@@ -31,9 +31,13 @@ const SearchBar = () => {
   const { data, isLoading } = useGetHerbSearchList(searchQuery)
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault() 
-    navigate(`/picture?name=${e.currentTarget.search.value}`)
-    setIsShow(false)
+    e.preventDefault()
+    console.log(e.currentTarget.search.value.length)
+    if (e.currentTarget.search.value.length <= 0) navigate('/picture')
+    else {
+      navigate(`/picture?name=${e.currentTarget.search.value}`)
+      setIsShow(false)
+    }
   }
 
   const handleChange = async (e: ChangeEvent<HTMLInputElement>) => {
