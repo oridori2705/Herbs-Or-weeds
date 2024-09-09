@@ -9,7 +9,7 @@ export default {
 
 export const Default = {
   render: function Render() {
-    const { Modal, open, close, isOpen, isAnimating } = useModal()
+    const { Modal, open, close, isOpen } = useModal()
 
     return (
       <div>
@@ -26,8 +26,7 @@ export const Default = {
           </button>
           <Modal
             isOpen={isOpen}
-            close={close}
-            isAnimating={isAnimating}>
+            close={close}>
             <div>안녕하세요</div>
             <div>하이하이복실</div>
           </Modal>
