@@ -66,19 +66,28 @@ export const ModalContent = styled.div<ModalContentProps>`
   bottom: 0;
   left: 0;
   right: 0;
-  width: ${props => `${props.width}%`};
+  width: 800px;
   height: ${props => `${props.height}%`};
   margin: auto;
   border-radius: 0.5rem;
-  background-color: white;
+  background-color: transparent;
   z-index: 50;
-  color: black;
-  overflow: scroll;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-  animation: ${props => (props.isOpen ? slideIn : slideOut)} 0.5s forwards;
+  overflow-y: auto;
+  -ms-overflow-style: auto;
+  scrollbar-width: thin;
 
   &::-webkit-scrollbar {
-    display: none;
+    width: 8px;
   }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1);
+  }
+
+  animation: ${props => (props.isOpen ? slideIn : slideOut)} 0.5s forwards;
 `
