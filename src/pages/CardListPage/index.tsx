@@ -76,11 +76,10 @@ const CardListPage = () => {
                 height={300}
               />
             )}
-            {!hasNextPage && !isFetching && (
-              <div>이제 볼 수 있는 결과가 없어요.</div>
-            )}
-            {herbList.length === 0 && !isFetching && (
+            {!hasNextPage && !isFetching && herbList.length === 0 ? (
               <div>아무것도 없네요!</div>
+            ) : (
+              <div>이제 볼 수 있는 결과가 없어요.</div>
             )}
           </>
         )}
