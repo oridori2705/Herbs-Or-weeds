@@ -1,5 +1,5 @@
 import Skeleton from '~/components/Skeleton'
-import { CardListContainer, SearchResultContainer } from '.'
+import { CardListContainer, SearchResultContainer } from './CardListPage.styled'
 
 const CardSkeleton = () => {
   return (

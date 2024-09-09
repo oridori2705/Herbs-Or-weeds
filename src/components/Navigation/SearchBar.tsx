@@ -32,8 +32,12 @@ const SearchBar = () => {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    navigate(`/picture?name=${e.currentTarget.search.value}`)
-    setIsShow(false)
+    console.log(e.currentTarget.search.value.length)
+    if (e.currentTarget.search.value.length <= 0) navigate('/picture')
+    else {
+      navigate(`/picture?name=${e.currentTarget.search.value}`)
+      setIsShow(false)
+    }
   }
 
   const handleChange = async (e: ChangeEvent<HTMLInputElement>) => {
@@ -86,7 +90,7 @@ const SearchBar = () => {
             <RecommendResultStatus>
               <Spinner />
             </RecommendResultStatus>
-          ) : data.length > 0 ? (
+          ) : data && data.length > 0 ? (
             data.map((data: RecommendListItem) => (
               <RecommendListLi key={data.No}>
                 <Link to={`/picture?name=${data.name}`}>

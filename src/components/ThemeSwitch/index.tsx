@@ -1,3 +1,5 @@
+import { ButtonContainer, ToggleButton } from './ThemeButton.styled'
+
 interface ThemeSwitchProps {
   checked: boolean
   toggleSwitch: () => void
@@ -5,9 +7,13 @@ interface ThemeSwitchProps {
 
 const ThemeSwitch = ({ checked, toggleSwitch }: ThemeSwitchProps) => {
   return (
-    <div>
-      <button onClick={toggleSwitch}>{checked ? 'light' : 'dark'}버튼</button>
-    </div>
+    <ButtonContainer>
+      <ToggleButton
+        checked={checked}
+        onClick={toggleSwitch}>
+        {checked ? 'Light 모드' : 'Dark 모드'}
+      </ToggleButton>
+    </ButtonContainer>
   )
 }
 

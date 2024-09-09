@@ -1,6 +1,6 @@
 import { useInfiniteQuery } from '@tanstack/react-query'
 import { getHerbList } from '~/api/herbList'
-import { HerbList, HerbInfos, HerbListPageParams } from '~/types/herbList'
+import { HerbInfos, HerbListPageParams } from '~/types/herbList'
 
 const useGetHerbList = ({
   searchData = '',
@@ -8,10 +8,10 @@ const useGetHerbList = ({
   numOfRows = 10
 }: HerbListPageParams) => {
   const { data, hasNextPage, isFetching, isFetchingNextPage, fetchNextPage } =
-    useInfiniteQuery<HerbList>({
+    useInfiniteQuery({
       queryKey: ['herb', { searchData, pageNo, numOfRows }],
       queryFn: ({ pageParam = pageNo }) =>
-        getHerbList({ searchData, pageNo: pageParam as number, numOfRows }),
+        getHerbList({ searchData, pageNo: pageParam, numOfRows }),
       initialPageParam: 1,
       getNextPageParam: (lastPage, allPages) => {
         if (lastPage.length < numOfRows) return undefined

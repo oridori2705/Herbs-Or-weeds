@@ -35,6 +35,7 @@ export const Default: Story = {
           minHeight: '100vh'
         }}>
         <CardListItem
+          size={200}
           id="205054"
           image="http://www.nongsaro.go.kr/cms_contents/1124/205054_MF_REPR_ATTACH_01.jpg"
           isHerb={true}

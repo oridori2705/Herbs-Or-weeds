@@ -1,4 +1,4 @@
-import { ReactNode, useRef, useState } from 'react'
+import { ReactNode, useEffect, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { ModalContent, ModalOverlay } from './styled'
 
@@ -11,12 +11,10 @@ interface UseModalResult {
   open: () => void
   close: () => void
   isOpen: boolean
-  isAnimating: boolean
 }
 interface ModalComponentProps {
   children: ReactNode
   isOpen: boolean
-  isAnimating: boolean
   width?: number
   height?: number
   close: () => void
@@ -26,57 +24,73 @@ const ModalComponent = ({
   isOpen,
   width = 70,
   height = 70,
-  isAnimating,
   close,
   children
 }: ModalComponentProps) => {
-  if (!isOpen) return null
+  const [isAnimating, setIsAnimating] = useState<boolean>(isOpen)
 
-  return createPortal(
-    <>
-      <ModalOverlay
-        isOpen={isAnimating}
-        onClick={close}
-      />
-      <ModalContent
-        width={width}
-        height={height}
-        isOpen={isAnimating}>
-        {children}
-      </ModalContent>
-    </>,
-    document.body
-  )
+  const handleTransitionEnd = () => {
+    if (!isAnimating) {
+      close()
+    }
+  }
+
+  useEffect(() => {
+    document.body.style.cssText = `
+    position: fixed; 
+    top: -${window.scrollY}px;
+    overflow-y: scroll;
+    width: 100%;`
+    return () => {
+      const scrollY = document.body.style.top
+      document.body.style.cssText = ''
+      window.scrollTo(0, parseInt(scrollY || '0', 10) * -1)
+    }
+  }, [])
+
+  useEffect(() => {
+    if (isOpen) {
+      setIsAnimating(true)
+    }
+  }, [isOpen])
+
+  return isOpen
+    ? createPortal(
+        <>
+          <ModalOverlay
+            isOpen={isAnimating}
+            onClick={() => setIsAnimating(false)}
+            onAnimationEnd={handleTransitionEnd}
+          />
+          <ModalContent
+            width={width}
+            height={height}
+            isOpen={isAnimating}
+            onAnimationEnd={handleTransitionEnd}>
+            {children}
+          </ModalContent>
+        </>,
+        document.body
+      )
+    : null
 }
 
 export const useModal = (initialValue = false): UseModalResult => {
-  const [isOpen, setOpen] = useState<boolean>(initialValue)
-  const [isAnimating, setAnimating] = useState(false)
-
-  const isLoading = useRef<boolean>(false)
+  const [isOpen, setIsOpen] = useState<boolean>(initialValue)
 
   const open = () => {
-    if (isLoading.current) return
-
-    setOpen(true)
-    isLoading.current = true
-    window.setTimeout(() => {
-      setAnimating(true)
-      isLoading.current = false
-    }, 0)
+    setIsOpen(true)
   }
 
   const close = () => {
-    if (isLoading.current) return
-
-    setAnimating(false)
-    isLoading.current = true
-    window.setTimeout(() => {
-      setOpen(false)
-      isLoading.current = false
-    }, 1000)
+    setIsOpen(false)
   }
 
-  return { Modal: ModalComponent, open, close, isOpen, isAnimating }
+  return {
+    Modal: ModalComponent,
+    open,
+    close,
+    isOpen
+  }
 }
 export default useModal

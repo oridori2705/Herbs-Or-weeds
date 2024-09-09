@@ -8,12 +8,18 @@ interface CardContainerProps {
   overlayX: number
   overlayY: number
   isHerb: boolean
+  width: number
+  height: number
+}
+interface SeasonContainerProps {
+  width: number
+  height: number
 }
 
 export const CardContainer = styled.div<CardContainerProps>`
   border-radius: 18px;
-  width: 100%;
-  height: 300px;
+  width: ${props => `${props.width}px`};
+  height: ${props => `${props.height}px`};
   display: flex;
   flex-direction: column;
   position: relative;
@@ -58,8 +64,8 @@ export const CardContainer = styled.div<CardContainerProps>`
   &::after {
     content: '';
     position: absolute;
-    width: 100%;
-    height: 300px;
+    width: ${props => `${props.width}px`};
+    height: ${props => `${props.height}px`};
     z-index: 5;
     ${props =>
       props.isHerb &&
@@ -81,13 +87,14 @@ export const CardContainer = styled.div<CardContainerProps>`
   }
 `
 
-export const SeasonContainer = styled.div`
+export const SeasonContainer = styled.div<SeasonContainerProps>`
   z-index: 1;
   border-radius: 15px;
-  width: 100%;
-  height: 300px;
+  width: ${props => `${props.width}px`};
+  height: ${props => `${props.height}px`};
   background-image: url(${backgroundImage});
   filter: hue-rotate(165deg);
+  background-size: 100% 100%;
 `
 
 export const ImageContainer = styled.div<{ img_src: string }>`

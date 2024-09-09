@@ -1,4 +1,5 @@
 import { createBrowserRouter } from 'react-router-dom'
+import CardDetail from '~/pages/CardDetail'
 import CardListPage from '~/pages/CardListPage'
 import GamePage from '~/pages/GamePage'
 import MainPage from '~/pages/MainPage'
@@ -15,7 +16,13 @@ export const router = createBrowserRouter([
       },
       {
         path: '/picture',
-        element: <CardListPage />
+        element: <CardListPage />,
+        children: [
+          {
+            path: '/picture/:pictureId',
+            element: <CardDetail />
+          }
+        ]
       },
       {
         path: '/game',

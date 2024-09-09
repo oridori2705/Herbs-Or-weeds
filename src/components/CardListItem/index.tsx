@@ -5,13 +5,14 @@ import {
   ImageContainer,
   SeasonContainer
 } from './styled'
-interface CardListItemProps {
+export interface CardListItemProps {
   id: string
   name: string
   scientificName: string
   image: string
   medicineName: string
   isHerb: boolean
+  size: number
 }
 
 const CardListItem = ({
@@ -20,8 +21,11 @@ const CardListItem = ({
   scientificName,
   image,
   medicineName,
-  isHerb
+  isHerb,
+  size
 }: CardListItemProps) => {
+  const width = size
+  const height = size + 100
   const [tiltX, setTiltX] = useState(0)
   const [tiltY, setTiltY] = useState(0)
   const [overlayX, setOverlayX] = useState(0)
@@ -40,8 +44,8 @@ const CardListItem = ({
       setOverlayX(x)
       setOverlayY(y)
 
-      const tiltX = (4 / 30) * y - 20
-      const tiltY = (-1 / 5) * x + 20
+      const tiltX = (4 / 30) * ((y / height) * 300) - 20
+      const tiltY = (-1 / 5) * ((x / width) * 200) + 20
       setTiltX(tiltX)
       setTiltY(tiltY)
     })
@@ -65,8 +69,12 @@ const CardListItem = ({
       overlayY={overlayY}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      isHerb={isHerb}>
-      <SeasonContainer>
+      isHerb={isHerb}
+      width={width}
+      height={height}>
+      <SeasonContainer
+        width={width}
+        height={height}>
         <ImageContainer img_src={image} />
         <DescriptionContainer>
           <p>{id}</p>
