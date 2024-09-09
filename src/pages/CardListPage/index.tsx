@@ -60,6 +60,7 @@ const CardListPage = () => {
                   key={herb.elements[1].elements[0].cdata}
                   id={herb.elements[1].elements[0].cdata}>
                   <CardListItem
+                    size={200}
                     id={herb.elements[1].elements[0].cdata}
                     image={herb.elements[4].elements[0].cdata}
                     isHerb={herb.isHerb}
