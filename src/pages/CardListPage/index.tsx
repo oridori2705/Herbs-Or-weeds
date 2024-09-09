@@ -70,6 +70,12 @@ const CardListPage = () => {
                   />
                 </LinkCardListItem>
               ))}
+            {isFetching && (
+              <Skeleton.Card
+                width={200}
+                height={300}
+              />
+            )}
             {!hasNextPage && !isFetching && (
               <div>이제 볼 수 있는 결과가 없어요.</div>
             )}
