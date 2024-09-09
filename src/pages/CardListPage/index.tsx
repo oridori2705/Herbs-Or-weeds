@@ -1,4 +1,3 @@
-import styled from '@emotion/styled'
 import CardListItem from '~/components/CardListItem'
 import Skeleton from '~/components/Skeleton'
 import useGetHerbList from '~/hooks/queries/useGetHerbList'
@@ -7,21 +6,11 @@ import { HerbInfos } from '~/types/herbList'
 import CardSkeleton from './Skeleton'
 import { Outlet, useSearchParams } from 'react-router-dom'
 import LinkCardListItem from '~/components/LinkCardListItem'
-
-export const CardListContainer = styled.ul`
-  display: grid;
-  grid-template-columns: repeat(auto-fill, 200px);
-  grid-template-rows: 300px;
-  justify-content: center;
-
-  gap: 50px;
-`
-
-export const SearchResultContainer = styled.div`
-  margin-top: 55px;
-  padding-top: 10px;
-  height: 60px;
-`
+import {
+  CardListContainer,
+  MessageContainer,
+  SearchResultContainer
+} from './CardListPage.styled'
 
 const CardListPage = () => {
   const [searchParams] = useSearchParams()
@@ -77,9 +66,14 @@ const CardListPage = () => {
               />
             )}
             {!hasNextPage && !isFetching && herbList.length === 0 ? (
-              <div>아무것도 없네요!</div>
+              <MessageContainer>아무것도 없네요!</MessageContainer>
             ) : (
-              <div>이제 볼 수 있는 결과가 없어요.</div>
+              !hasNextPage &&
+              !isFetching && (
+                <MessageContainer>
+                  이제 볼 수 있는 결과가 없어요.
+                </MessageContainer>
+              )
             )}
           </>
         )}
