@@ -20,6 +20,10 @@ const CardDetail = () => {
   const { pictureId } = useParams()
   const { data, isFetching, isSuccess } = useGetHerbDetail(Number(pictureId))
 
+  const replaceBrTags = (description: string) => {
+    const formattedText = description.replace(/<br\s*\/?>/g, '\n')
+    return formattedText
+  }
   useEffect(() => {
     open()
   }, [])
@@ -67,12 +71,12 @@ const CardDetail = () => {
               <InfoItem>학명: {data.bneNm}</InfoItem>
               <InfoItem>생약명: {data.hbdcNm}</InfoItem>
               <InfoItem>이용부위: {data.useeRegn}</InfoItem>
-              <InfoItem>형태: {data.stle}</InfoItem>
+              <InfoItem>형태: {replaceBrTags(data.stle)}</InfoItem>
             </InfoSection>
 
             <InfoSection>
               <SectionTitle>민간요법</SectionTitle>
-              <Description>{data.prvateTherpy}</Description>
+              <Description>{replaceBrTags(data.prvateTherpy)}</Description>
             </InfoSection>
           </Container>
         ) : (
